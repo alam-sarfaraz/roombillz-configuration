@@ -1,0 +1,1061 @@
+{
+  "userName": "sarfarazalam",
+  "firstName": "sarfaraz",
+  "middleName": "",
+  "lastName": "Alam",
+  "email": "sarfarazalam@example.com",
+  "confirmEmail": "sarfarazalam@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-02-27",
+  "gender": "Male",
+  "mobileNumber": "8226854405",
+  "atlMobileNumber": "8789519442"
+}
+
+{
+  "userName": "lalitdhurbey",
+  "firstName": "lalit",
+  "middleName": "",
+  "lastName": "dhurbey",
+  "email": "lalitdhurbey@example.com",
+  "confirmEmail": "lalitdhurbey@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-11-04",
+  "gender": "Male",
+  "mobileNumber": "7667865505",
+  "atlMobileNumber": "7867519442"
+}
+
+{
+  "userName": "dineshingole",
+  "firstName": "dinesh",
+  "middleName": "",
+  "lastName": "ingole",
+  "email": "dineshingole@example.com",
+  "confirmEmail": "dineshingole@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-10-20",
+  "gender": "Male",
+  "mobileNumber": "8478519443",
+  "atlMobileNumber": "6567519554"
+}
+
+
+{
+  "userName": "priyankakudnar",
+  "firstName": "priyanka",
+  "middleName": "",
+  "lastName": "kudnar",
+  "email": "priyankakudnar@example.com",
+  "confirmEmail": "priyankakudnar@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-04-06",
+  "gender": "Female",
+  "mobileNumber": "7654318772",
+  "atlMobileNumber": "8765418552"
+}
+
+{
+  "userName": "aniketshukla",
+  "firstName": "aniket",
+  "middleName": "",
+  "lastName": "shukla",
+  "email": "aniketshukla@example.com",
+  "confirmEmail": "aniketshukla@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-02-15",
+  "gender": "Male",
+  "mobileNumber": "8776544405",
+  "atlMobileNumber": "7876543221"
+}
+
+{
+  "userName": "nishantpandey",
+  "firstName": "nishant",
+  "middleName": "",
+  "lastName": "pandey",
+  "email": "nishantpandey@example.com",
+  "confirmEmail": "nishantpandey@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-04-15",
+  "gender": "Male",
+  "mobileNumber": "8776543304",
+  "atlMobileNumber": "9898765432"
+}
+
+{
+  "userName": "adarshkumar",
+  "firstName": "adarsh",
+  "middleName": "",
+  "lastName": "kumar",
+  "email": "adarshkumar@example.com",
+  "confirmEmail": "adarshkumar@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-11-05",
+  "gender": "Male",
+  "mobileNumber": "8776543304",
+  "atlMobileNumber": "9898765432"
+}
+
+
+{
+  "userName": "shreekantkumar",
+  "firstName": "shreekant",
+  "middleName": "kumar",
+  "lastName": "jaisawal",
+  "email": "shreekantkumar@example.com",
+  "confirmEmail": "shreekantkumar@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-11-05",
+  "gender": "Male",
+  "mobileNumber": "8665430054",
+  "atlMobileNumber": "8554054405"
+}
+
+
+{
+  "userName": "atulverma",
+  "firstName": "atul",
+  "middleName": "kumar",
+  "lastName": "verma",
+  "email": "atulverma@example.com",
+  "confirmEmail": "atulverma@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-11-07",
+  "gender": "Male",
+  "mobileNumber": "8665430054",
+  "atlMobileNumber": "8554054405"
+}
+
+{
+  "userName": "rajnikantkumar",
+  "firstName": "rajnikant",
+  "middleName": "kumar",
+  "lastName": "singh",
+  "email": "rajnikantkumar@example.com",
+  "confirmEmail": "rajnikantkumar@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-12-07",
+  "gender": "Male",
+  "mobileNumber": "8778987709",
+  "atlMobileNumber": "9898765998"
+}
+
+{
+  "userName": "vickysingh",
+  "firstName": "vicky",
+  "middleName": "kumar",
+  "lastName": "singh",
+  "email": "vickysingh@example.com",
+  "confirmEmail": "vickysingh@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1997-12-07",
+  "gender": "Male",
+  "mobileNumber": "8778987709",
+  "atlMobileNumber": "9898765998"
+}
+
+{
+  "userName": "abhimanyukumar",
+  "firstName": "abhimanyu",
+  "middleName": "kumar",
+  "lastName": "singh",
+  "email": "abhimanyu@example.com",
+  "confirmEmail": "abhimanyu@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-12-07",
+  "gender": "Male",
+  "mobileNumber": "8778987709",
+  "atlMobileNumber": "9898765998"
+}
+
+{
+  "userName": "vikashtiwari",
+  "firstName": "vikash",
+  "middleName": "kumar",
+  "lastName": "tiwar",
+  "email": "vikashtiwari@example.com",
+  "confirmEmail": "vikashtiwari@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-12-07",
+  "gender": "Male",
+  "mobileNumber": "8778987709",
+  "atlMobileNumber": "9898765998"
+}
+
+
+{
+  "userName": "deepakkumar",
+  "firstName": "deepak",
+  "middleName": "kumar",
+  "lastName": "singh",
+  "email": "deepakkumar@example.com",
+  "confirmEmail": "deepakkumar@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-12-07",
+  "gender": "Male",
+  "mobileNumber": "8778987709",
+  "atlMobileNumber": "9898765998"
+}
+
+{
+  "userName": "sumitkumar",
+  "firstName": "sumit",
+  "middleName": "",
+  "lastName": "kumar",
+  "email": "sumitkumar@example.com",
+  "confirmEmail": "sumitkumar@example.com",
+  "password": "Secret@123",
+  "confirmPassword": "Secret@123",
+  "dob": "1998-05-10",
+  "gender": "Male",
+  "mobileNumber": "9999999876",
+  "atlMobileNumber": "9897654321"
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------
+RoomBillz-1
+sarfarazalam
+shreekantkumar
+atulverma
+rajnikantkumar
+vickysingh
+
+RoomBillz-2
+sarfarazalam
+lalitdhurbey
+dineshingole
+priyankakudnar
+adarshkumar
+
+RoomBillz-3
+aniketshukla
+sarfarazalam
+nishantpandey
+adarshkumar
+
+RoomBillz-4
+abhimanyukumar
+sarfarazalam
+vikashtiwari
+sumitkumar
+deepakkumar
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-1",
+  "purchaseDate": "2025-08-01",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "sugar",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Onion",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "potato",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+-----------------------------------------------------------
+{
+  "userName": "shreekantkumar",
+  "groupName": "RoomBillz-1",
+  "purchaseDate": "2025-08-02",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "Chicken",
+      "itemPrice": 200,
+      "unitPrice": 200,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Masala",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "tomato",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+--------------------------------------------------
+{
+  "userName": "atulverma",
+  "groupName": "RoomBillz-1",
+  "purchaseDate": "2025-08-05",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Biscuit",
+      "itemPrice": 400,
+      "unitPrice": 400,
+      "quantity": "10packet"
+    },
+    {
+      "itemName": "curd",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "milk",
+      "itemPrice": 100,
+      "unitPrice": 50,
+      "quantity": "2litre"
+    },
+    {
+      "itemName": "tomato",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+
+---------------------------------------
+{
+  "userName": "rajnikantkumar",
+  "groupName": "RoomBillz-1",
+  "purchaseDate": "2025-08-10",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Soap",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "surf",
+      "itemPrice": 50,
+      "unitPrice": 100,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "shampoo",
+      "itemPrice": 100,
+      "unitPrice": 2,
+      "quantity": "50"
+    },
+    {
+      "itemName": "tootpaste",
+      "itemPrice":100,
+      "unitPrice": 100,
+      "quantity": "1pack"
+    }
+  ]
+}
+----------------------------------------------
+
+{
+  "userName": "vickysingh",
+  "groupName": "RoomBillz-1",
+  "purchaseDate": "2025-08-25",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Rice",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "Flour",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Refined oil",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "mustard Oil",
+      "itemPrice":100,
+      "unitPrice": 100,
+      "quantity": "1pack"
+    }
+  ]
+}
+-------------------------------------------------------------------
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-1",
+  "purchaseDate": "2025-08-30",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "chicken",
+      "itemPrice": 400,
+      "unitPrice": 200,
+      "quantity": "2Kg"
+    }
+  ]
+}
+----------------------------------------------------------------------------
+{
+  "userName": "lalitdhurbey",
+  "groupName": "RoomBillz-2",
+  "purchaseDate": "2025-09-09",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "sugar",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Onion",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "potato",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+-----------------------------------------------------------
+{
+  "userName": "dineshingole",
+  "groupName": "RoomBillz-2",
+  "purchaseDate": "2025-09-10",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "Chicken",
+      "itemPrice": 200,
+      "unitPrice": 200,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Masala",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "tomato",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+--------------------------------------------------
+{
+  "userName": "priyankakudnar",
+  "groupName": "RoomBillz-2",
+  "purchaseDate": "2025-09-05",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Biscuit",
+      "itemPrice": 400,
+      "unitPrice": 400,
+      "quantity": "10packet"
+    },
+    {
+      "itemName": "curd",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "milk",
+      "itemPrice": 100,
+      "unitPrice": 50,
+      "quantity": "2litre"
+    },
+    {
+      "itemName": "tomato",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+
+---------------------------------------
+{
+  "userName": "adarshkumar",
+  "groupName": "RoomBillz-2",
+  "purchaseDate": "2025-09-10",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Soap",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "surf",
+      "itemPrice": 50,
+      "unitPrice": 100,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "shampoo",
+      "itemPrice": 100,
+      "unitPrice": 2,
+      "quantity": "50"
+    },
+    {
+      "itemName": "tootpaste",
+      "itemPrice":100,
+      "unitPrice": 100,
+      "quantity": "1pack"
+    }
+  ]
+}
+----------------------------------------------
+
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-2",
+  "purchaseDate": "2025-09-25",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Rice",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "Flour",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Refined oil",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "mustard Oil",
+      "itemPrice":100,
+      "unitPrice": 100,
+      "quantity": "1pack"
+    }
+  ]
+}
+-------------------------------------------------------------------
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-2",
+  "purchaseDate": "2025-09-20",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "chicken",
+      "itemPrice": 400,
+      "unitPrice": 200,
+      "quantity": "2Kg"
+    }
+  ]
+}
+------------------------------------------------------------------------------
+
+{
+  "userName": "aniketshukla",
+  "groupName": "RoomBillz-3",
+  "purchaseDate": "2025-10-10",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "carrot",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "cucumber",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "mango",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+-----------------------------------------------------------
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-3",
+  "purchaseDate": "2025-10-04",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "apple",
+      "itemPrice": 300,
+      "unitPrice": 300,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Tea",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "milk",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "Ghee",
+      "itemPrice":1000,
+      "unitPrice": 500,
+      "quantity": "2litre"
+    }
+  ]
+}
+--------------------------------------------------
+{
+  "userName": "nishantpandey",
+  "groupName": "RoomBillz-3",
+  "purchaseDate": "2025-10-07",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Biscuit",
+      "itemPrice": 400,
+      "unitPrice": 400,
+      "quantity": "10packet"
+    },
+    {
+      "itemName": "curd",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "milk",
+      "itemPrice": 100,
+      "unitPrice": 50,
+      "quantity": "2litre"
+    },
+    {
+      "itemName": "tomato",
+      "itemPrice":100,
+      "unitPrice": 50,
+      "quantity": "2kg"
+    }
+  ]
+}
+
+---------------------------------------
+{
+  "userName": "adarshkumar",
+  "groupName": "RoomBillz-3",
+  "purchaseDate": "2025-10-10",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Soap",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "surf",
+      "itemPrice": 50,
+      "unitPrice": 100,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "shampoo",
+      "itemPrice": 100,
+      "unitPrice": 2,
+      "quantity": "50"
+    },
+    {
+      "itemName": "tootpaste",
+      "itemPrice":100,
+      "unitPrice": 100,
+      "quantity": "1pack"
+    }
+  ]
+}
+----------------------------------------------
+
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-3",
+  "purchaseDate": "2025-10-25",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Rice",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "Flour",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Refined oil",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "mustard Oil",
+      "itemPrice":100,
+      "unitPrice": 100,
+      "quantity": "1pack"
+    }
+  ]
+}
+-------------------------------------------------------------------
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-3",
+  "purchaseDate": "2025-10-20",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "chicken",
+      "itemPrice": 400,
+      "unitPrice": 200,
+      "quantity": "2Kg"
+    }
+  ]
+}
+
+---------------------------------
+{
+  "userName": "abhimanyukumar",
+  "groupName": "RoomBillz-4",
+  "purchaseDate": "2025-08-08",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "carrot",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "cucumber",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "mango",
+      "itemPrice":80,
+      "unitPrice":40,
+      "quantity": "2kg"
+    }
+  ]
+}
+-----------------------------------------------------------
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-4",
+  "purchaseDate": "2025-08-04",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "apple",
+      "itemPrice": 300,
+      "unitPrice": 300,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Tea",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "milk",
+      "itemPrice":80,
+      "unitPrice":80,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "Ghee",
+      "itemPrice":800,
+      "unitPrice":400,
+      "quantity": "2litre"
+    }
+  ]
+}
+--------------------------------------------------
+{
+  "userName": "vikashtiwari",
+  "groupName": "RoomBillz-4",
+  "purchaseDate": "2025-08-07",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "Biscuit",
+      "itemPrice": 400,
+      "unitPrice": 400,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "curd",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "milk",
+      "itemPrice":80,
+      "unitPrice":40,
+      "quantity": "2litre"
+    },
+    {
+      "itemName": "tomato",
+      "itemPrice":80,
+      "unitPrice":40,
+      "quantity": "2kg"
+    }
+  ]
+}
+
+---------------------------------------
+{
+  "userName": "sumitkumar",
+  "groupName": "RoomBillz-4",
+  "purchaseDate": "2025-08-08",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Soap",
+      "itemPrice":80,
+      "unitPrice":80,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "surf",
+      "itemPrice":50,
+      "unitPrice":100,
+      "quantity": "500gm"
+    },
+    {
+      "itemName": "shampoo",
+      "itemPrice":50,
+      "unitPrice":2,
+      "quantity": "50"
+    },
+    {
+      "itemName": "tootpaste",
+      "itemPrice":80,
+      "unitPrice":80,
+      "quantity": "1pack"
+    }
+  ]
+}
+----------------------------------------------
+
+{
+  "userName": "deepakkumar",
+  "groupName": "RoomBillz-4",
+  "purchaseDate": "2025-08-25",
+  "modeOfPayment": "UPI",
+  "itemDetails": [
+    {
+      "itemName": "Rice",
+      "itemPrice": 500,
+      "unitPrice": 500,
+      "quantity": "1Kg"
+    },
+    {
+      "itemName": "Flour",
+      "itemPrice": 400,
+      "unitPrice": 400,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Refined oil",
+      "itemPrice": 100,
+      "unitPrice": 100,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "mustard Oil",
+      "itemPrice":300,
+      "unitPrice": 300,
+      "quantity": "1pack"
+    }
+  ]
+}
+-------------------------------------------------------------------
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-4",
+  "purchaseDate": "2025-08-20",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "Cylinder",
+      "itemPrice": 1000,
+      "unitPrice": 1000,
+      "quantity": "1"
+    }
+  ]
+}
+
+
+-------------------------------------------------------
+{
+  "userName": "sarfarazalam",
+  "groupName": "RoomBillz-1",
+  "purchaseDate": "2025-08-04",
+  "modeOfPayment": "Cash",
+  "itemDetails": [
+    {
+      "itemName": "Sugar",
+      "itemPrice": 40,
+      "unitPrice": 40,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "Tea",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "milk",
+      "itemPrice":80,
+      "unitPrice":80,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "Ghee",
+      "itemPrice":800,
+      "unitPrice":400,
+      "quantity": "2litre"
+    },
+    {
+      "itemName": "tomato",
+      "itemPrice": 40,
+      "unitPrice": 40,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "grape",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "refined oil",
+      "itemPrice":150,
+      "unitPrice":1500,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "mustard oil",
+      "itemPrice":300,
+      "unitPrice":300,
+      "quantity": "1litre"
+    },
+    {
+      "itemName": "water",
+      "itemPrice": 40,
+      "unitPrice": 40,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "coke",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "soap",
+      "itemPrice":150,
+      "unitPrice":150,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "shampoo",
+      "itemPrice":50,
+      "unitPrice":1,
+      "quantity": "50"
+    },
+    {
+      "itemName": "rasgulla",
+      "itemPrice": 400,
+      "unitPrice": 400,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "colgate",
+      "itemPrice": 50,
+      "unitPrice": 50,
+      "quantity": "1packet"
+    },
+    {
+      "itemName": "dal",
+      "itemPrice":150,
+      "unitPrice":150,
+      "quantity": "1kg"
+    },
+    {
+      "itemName": "rice",
+      "itemPrice":500,
+      "unitPrice":250,
+      "quantity": "2kg"
+    }
+  ]
+}
+
+
+
+

@@ -1,0 +1,97 @@
+# Stop old processes
+wmic process where "CommandLine like '%zookeeper%'" delete
+wmic process where "CommandLine like '%kafka.Kafka%'" delete
+
+1 Start Zookeeper
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+2 Start Kafka Broker
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+3 Create Topics
+# Create RoomBillz topic
+.\bin\windows\kafka-topics.bat --create --topic roomBillz-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+# Create Notification topic
+.\bin\windows\kafka-topics.bat --create --topic roomBillz-notification-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+4 List Topics
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+5 Describe Topic
+.\bin\windows\kafka-topics.bat --describe --topic roomBillz-topic --bootstrap-server localhost:9092
+
+6 Delete Topics
+.\bin\windows\kafka-topics.bat --delete --topic roomBillz-topic --bootstrap-server localhost:9092
+.\bin\windows\kafka-topics.bat --delete --topic roomBillz-notification-topic --bootstrap-server localhost:9092
+
+7 Produce a Test Message
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic roomBillz-topic
+  {"eventType": "TEST", "message": "Hello from RoomBillz!", "sourceService": "RoomBillz"}
+  
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic roomBillz-notification-topic
+{"eventType": "TEST", "message": "Hello from RoomBillz!", "sourceService": "Notification service"} 
+  
+8 Consume Messages
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic roomBillz-topic --from-beginning
+ 
+----------------------------------------------------------------------------------------------------------------------------------------------------------- 
+For prometheus and gafana 
+
+docker pull grafana/grafana
+docker pull prom/prometheus
+----------------------------------------------------------------------------------------------------------------------------------------------------------- 
+Create a file prometheus.yml in some folder on your machine (e.g., C:\monitoring\prometheus.yml or ./monitoring/prometheus.yml):
+
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'roomBillz-service'
+    metrics_path: '/api/v1/roomBillz/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+
+  - job_name: 'roomBillz-notification-service'
+    metrics_path: '/api/v1/notification/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8082']
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+cd D:\Prometheus_config\monitoring
+
+docker run -d --name prometheus -p 9090:9090 `
+  -v "$PWD/prometheus.yml:/etc/prometheus/prometheus.yml" `
+  prom/prometheus
+
+ocker run -d --name prometheus -p 9090:9090 -v "${PWD}\prometheus.yml:/etc/prometheus/prometheus.yml:ro" prom/prometheus
+Open: http://localhost:9090 → Status → Targets
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+docker run -d --name grafana -p 3000:3000 grafana/grafana
+
+Open: http://localhost:3000
+
+Go to : connections/datasources/
+Connection URL = http://host.docker.internal:9090
+Then save&test
+
+2.
+Click : Dashbaords
+      Then click New
+      Then import
+      -----------------------------------------
+      | Component              | Dashboard ID |
+      | ---------------------- | ------------ |
+      | JVM Micrometer Metrics | **4701**     |
+      | Spring Boot 3 Metrics  | **19123**    |
+      | Eureka metrics         | **10427**    |
+      -----------------------------------------
+      put ID and click load
+      Then click Prometheus select datasource
+      then click import
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
