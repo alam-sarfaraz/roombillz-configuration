@@ -1,0 +1,48 @@
+groups:
+  - name: RoomBillzAlerts
+    rules:
+
+      - alert: RoomBillzServiceDown
+        expr: up{application="ROOMBILLZ-SERVICE"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "RoomBillz Service is DOWN"
+          description: "{{ $labels.application }} @ {{ $labels.instance }} is not reachable."
+
+      - alert: NotificationServiceDown
+        expr: up{application="ROOMBILLZ-NOTIFICATION-SERVICE"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Notification Service is DOWN"
+          description: "{{ $labels.application }} @ {{ $labels.instance }} is not reachable."
+
+      - alert: EurekaServerDown
+        expr: up{application="ROOMBILLZ-EUREKA-SERVER"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Eureka Server is DOWN"
+          description: "{{ $labels.application }} @ {{ $labels.instance }} is not reachable."
+
+      - alert: EurekaNoInstancesRegistered
+        expr: eureka_instances_up == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "No Services Registered in Eureka"
+          description: "Eureka is running but no applications are registered."
+
+      - alert: EurekaInstanceCountLow
+        expr: eureka_instances_up < 2
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Not all services registered in Eureka"
+          description: "Registered services: {{ $value }} (Expected >= 2)"
