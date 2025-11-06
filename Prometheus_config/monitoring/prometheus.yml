@@ -5,12 +5,13 @@ global:
 alerting:
   alertmanagers:
     - static_configs:
-        - targets:
-            - 'alertmanager:9093'
+        - targets: 
+            - 'host.docker.internal:9093'
 
 rule_files:
   - "/etc/prometheus/alert-rules.yml"
-  
+  - "/etc/prometheus/recording-rules.yml"
+
 scrape_configs:
   - job_name: 'roomBillz-service'
     metrics_path: '/api/v1/roomBillz/actuator/prometheus'
@@ -18,6 +19,7 @@ scrape_configs:
       - targets: ['host.docker.internal:8081']
         labels:
           application: 'ROOMBILLZ-SERVICE'
+          env: 'dev'
 
   - job_name: 'roombillz-notification-service'
     metrics_path: '/api/v1/notification/actuator/prometheus'
@@ -25,16 +27,19 @@ scrape_configs:
       - targets: ['host.docker.internal:8082']
         labels:
           application: 'ROOMBILLZ-NOTIFICATION-SERVICE'
-  
+          env: 'dev'
+
   - job_name: 'eureka-server'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['host.docker.internal:8761']
         labels:
           application: 'ROOMBILLZ-EUREKA-SERVER'
-  
+          env: 'dev'
+
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
         labels:
-          application: 'PROMRTHEUS'
+          application: 'PROMETHEUS'
+          env: 'dev'

@@ -1,6 +1,6 @@
 version: "1.0"
-services:
 
+services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -19,6 +19,8 @@ services:
       - "9093:9093"
     volumes:
       - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - ./email-template.tmpl:/etc/alertmanager/email-template.tmpl
+
 
   grafana:
     image: grafana/grafana

@@ -2,47 +2,133 @@ groups:
   - name: RoomBillzAlerts
     rules:
 
+      # ======================================================
+      # ROOMBILLZ-SERVICE Alerts (Main App – strict thresholds)
+      # ======================================================
+
       - alert: RoomBillzServiceDown
         expr: up{application="ROOMBILLZ-SERVICE"} == 0
         for: 30s
         labels:
           severity: critical
+          service: roomBillz
         annotations:
-          summary: "RoomBillz Service is DOWN"
-          description: "{{ $labels.application }} @ {{ $labels.instance }} is not reachable."
+          summary: "🚨 RoomBillz Service DOWN"
+          description: |
+            Env: {{ $labels.env }}
+            Service: ROOMBILLZ-SERVICE
+            Instance: {{ $labels.instance }}
+            Status: ❌ DOWN
+            Action: Check logs and restart service.
+
+      - alert: RoomBillzHighLatencyP95
+        expr: job:http_request_duration_seconds:p95{application="ROOMBILLZ-SERVICE"} > 0.35
+        for: 5m
+        labels:
+          severity: warning
+          service: roomBillz
+        annotations:
+          summary: "⚠️ High Latency (RoomBillz Service)"
+          description: |
+            p95 latency is high: {{ $value | printf "%.3f" }}s (limit: 0.35s)
+            Check DB / downstream service.
+
+      - alert: RoomBillzHighErrorRate
+        expr: job:http_error_ratio:percent5m{application="ROOMBILLZ-SERVICE"} > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: roomBillz
+        annotations:
+          summary: "⚠️ RoomBillz Error Rate High"
+          description: |
+            Error rate: {{ $value | printf "%.2f" }}% (limit: 2%)
+
+      - alert: RoomBillzHighJVMHeapUsage
+        expr: job:jvm_heap_used_percent{application="ROOMBILLZ-SERVICE"} > 85
+        for: 10m
+        labels:
+          severity: warning
+          service: roomBillz
+        annotations:
+          summary: "⚠️ RoomBillz JVM Memory High"
+          description: |
+            Heap used: {{ $value | printf "%.1f" }}%
+            Possible memory leak or insufficient heap.
+
+      # ======================================================
+      # ROOMBILLZ-NOTIFICATION-SERVICE Alerts (Relaxed)
+      # ======================================================
 
       - alert: NotificationServiceDown
         expr: up{application="ROOMBILLZ-NOTIFICATION-SERVICE"} == 0
         for: 30s
         labels:
           severity: critical
+          service: notification
         annotations:
-          summary: "Notification Service is DOWN"
-          description: "{{ $labels.application }} @ {{ $labels.instance }} is not reachable."
+          summary: "🚨 Notification Service DOWN"
+          description: |
+            Env: {{ $labels.env }}
+            Instance: {{ $labels.instance }}
+            Restart the Notification Service.
+
+      - alert: NotificationHighLatencyP95
+        expr: job:http_request_duration_seconds:p95{application="ROOMBILLZ-NOTIFICATION-SERVICE"} > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: notification
+        annotations:
+          summary: "⚠️ Notification Service Slow"
+          description: |
+            p95: {{ $value | printf "%.3f" }}s (limit: 0.8s)
+
+      - alert: NotificationHighErrorRate
+        expr: job:http_error_ratio:percent5m{application="ROOMBILLZ-NOTIFICATION-SERVICE"} > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: notification
+        annotations:
+          summary: "⚠️ Notification Service Error Rate High"
+          description: |
+            Errors: {{ $value | printf "%.2f" }}% (>5%)
+
+      # ======================================================
+      # EUREKA-SERVER Alerts (No latency/error, because it's not a request API)
+      # ======================================================
 
       - alert: EurekaServerDown
         expr: up{application="ROOMBILLZ-EUREKA-SERVER"} == 0
-        for: 30s
+        for: 20s
         labels:
           severity: critical
+          service: eureka
         annotations:
-          summary: "Eureka Server is DOWN"
-          description: "{{ $labels.application }} @ {{ $labels.instance }} is not reachable."
+          summary: "🚨 Eureka Server DOWN"
+          description: |
+            Eureka is DOWN.
+            Service discovery will fail.
 
       - alert: EurekaNoInstancesRegistered
         expr: eureka_instances_up == 0
-        for: 1m
+        for: 2m
         labels:
           severity: warning
+          service: eureka
         annotations:
-          summary: "No Services Registered in Eureka"
-          description: "Eureka is running but no applications are registered."
+          summary: "⚠️ No Services Registered in Eureka"
+          description: |
+            Eureka is running, but 0 services are registered.
 
       - alert: EurekaInstanceCountLow
         expr: eureka_instances_up < 2
-        for: 1m
+        for: 2m
         labels:
           severity: warning
+          service: eureka
         annotations:
-          summary: "Not all services registered in Eureka"
-          description: "Registered services: {{ $value }} (Expected >= 2)"
+          summary: "⚠️ Some services not registered in Eureka"
+          description: |
+            Registered instances: {{ $value | printf "%.0f" }} (Expected >= 2)
