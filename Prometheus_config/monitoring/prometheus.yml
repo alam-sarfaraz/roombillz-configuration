@@ -29,6 +29,14 @@ scrape_configs:
           application: 'ROOMBILLZ-NOTIFICATION-SERVICE'
           env: 'dev'
 
+  - job_name: 'roombillz-scheduler-service'
+    metrics_path: '/api/v1/scheduler/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8083']
+        labels:
+          application: 'ROOMBILLZ-SCHEDULER-SERVICE'
+          env: 'dev'
+
   - job_name: 'eureka-server'
     metrics_path: '/actuator/prometheus'
     static_configs:

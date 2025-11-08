@@ -42,7 +42,7 @@ groups:
         annotations:
           summary: "⚠️ RoomBillz Error Rate High"
           description: |
-            Error rate: {{ $value | printf "%.2f" }}% (limit: 2%)
+            Error rate: {{ $value | printf "%.2f" }}% (limit: 2%).
 
       - alert: RoomBillzHighJVMHeapUsage
         expr: job:jvm_heap_used_percent{application="ROOMBILLZ-SERVICE"} > 85
@@ -55,6 +55,8 @@ groups:
           description: |
             Heap used: {{ $value | printf "%.1f" }}%
             Possible memory leak or insufficient heap.
+
+
 
       # ======================================================
       # ROOMBILLZ-NOTIFICATION-SERVICE Alerts (Relaxed)
@@ -93,10 +95,12 @@ groups:
         annotations:
           summary: "⚠️ Notification Service Error Rate High"
           description: |
-            Errors: {{ $value | printf "%.2f" }}% (>5%)
+            Errors: {{ $value | printf "%.2f" }}% (>5%).
+
+
 
       # ======================================================
-      # EUREKA-SERVER Alerts (No latency/error, because it's not a request API)
+      # EUREKA-SERVER Alerts
       # ======================================================
 
       - alert: EurekaServerDown
@@ -131,4 +135,61 @@ groups:
         annotations:
           summary: "⚠️ Some services not registered in Eureka"
           description: |
-            Registered instances: {{ $value | printf "%.0f" }} (Expected >= 2)
+            Registered instances: {{ $value | printf "%.0f" }} (Expected ≥ 2).
+
+
+
+      # ======================================================
+      # ROOMBILLZ-SCHEDULER-SERVICE Alerts
+      # ======================================================
+
+      - alert: SchedulerServiceDown
+        expr: up{application="ROOMBILLZ-SCHEDULER-SERVICE"} == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: scheduler
+        annotations:
+          summary: "🚨 Scheduler Service DOWN"
+          description: |
+            Env: {{ $labels.env }}
+            Instance: {{ $labels.instance }}
+            Status: ❌ DOWN
+            Action: Check container logs or restart service.
+
+      - alert: SchedulerHighJVMHeapUsage
+        expr: job:jvm_heap_used_percent{application="ROOMBILLZ-SCHEDULER-SERVICE"} > 85
+        for: 10m
+        labels:
+          severity: warning
+          service: scheduler
+        annotations:
+          summary: "⚠️ Scheduler JVM Memory High"
+          description: |
+            Heap usage is {{ $value | printf "%.1f" }}%.
+            Investigate memory leaks or increase heap size.
+
+      - alert: SchedulerJobExecutionError
+        expr: increase(roomBillz_scheduler_job_failed_total[5m]) > 3
+        for: 5m
+        labels:
+          severity: warning
+          service: scheduler
+        annotations:
+          summary: "⚠️ Scheduler Job Failures Detected"
+          description: |
+            Job failure count increased in the last 5 minutes.
+            Failures: {{ $value | printf "%.0f" }}
+            Check scheduler job logic or downstream services.
+
+      - alert: SchedulerJobExecutionDurationHigh
+        expr: histogram_quantile(0.95, sum(rate(roomBillz_scheduler_job_execution_seconds_bucket[5m])) by (le, application)) > 5
+        for: 5m
+        labels:
+          severity: warning
+          service: scheduler
+        annotations:
+          summary: "⚠️ Scheduler Job Execution Time High"
+          description: |
+            p95 job duration: {{ $value | printf "%.1f" }} seconds
+            Jobs taking too long, investigate dependencies.
