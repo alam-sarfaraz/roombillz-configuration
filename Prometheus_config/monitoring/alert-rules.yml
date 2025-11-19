@@ -19,7 +19,6 @@ groups:
             Service: ROOMBILLZ-SERVICE
             Instance: {{ $labels.instance }}
             Status: ❌ DOWN
-            Action: Check logs and restart service.
 
       - alert: RoomBillzHighLatencyP95
         expr: job:http_request_duration_seconds:p95{application="ROOMBILLZ-SERVICE"} > 0.35
@@ -31,7 +30,6 @@ groups:
           summary: "⚠️ High Latency (RoomBillz Service)"
           description: |
             p95 latency is high: {{ $value | printf "%.3f" }}s (limit: 0.35s)
-            Check DB / downstream service.
 
       - alert: RoomBillzHighErrorRate
         expr: job:http_error_ratio:percent5m{application="ROOMBILLZ-SERVICE"} > 2
@@ -42,7 +40,7 @@ groups:
         annotations:
           summary: "⚠️ RoomBillz Error Rate High"
           description: |
-            Error rate: {{ $value | printf "%.2f" }}% (limit: 2%).
+            Error rate: {{ $value | printf "%.2f" }}% (>2%).
 
       - alert: RoomBillzHighJVMHeapUsage
         expr: job:jvm_heap_used_percent{application="ROOMBILLZ-SERVICE"} > 85
@@ -54,7 +52,6 @@ groups:
           summary: "⚠️ RoomBillz JVM Memory High"
           description: |
             Heap used: {{ $value | printf "%.1f" }}%
-            Possible memory leak or insufficient heap.
 
 
 
@@ -73,7 +70,6 @@ groups:
           description: |
             Env: {{ $labels.env }}
             Instance: {{ $labels.instance }}
-            Restart the Notification Service.
 
       - alert: NotificationHighLatencyP95
         expr: job:http_request_duration_seconds:p95{application="ROOMBILLZ-NOTIFICATION-SERVICE"} > 0.8
@@ -84,7 +80,7 @@ groups:
         annotations:
           summary: "⚠️ Notification Service Slow"
           description: |
-            p95: {{ $value | printf "%.3f" }}s (limit: 0.8s)
+            p95 latency: {{ $value | printf "%.3f" }}s
 
       - alert: NotificationHighErrorRate
         expr: job:http_error_ratio:percent5m{application="ROOMBILLZ-NOTIFICATION-SERVICE"} > 5
@@ -93,7 +89,7 @@ groups:
           severity: warning
           service: notification
         annotations:
-          summary: "⚠️ Notification Service Error Rate High"
+          summary: "⚠️ Notification Error Rate High"
           description: |
             Errors: {{ $value | printf "%.2f" }}% (>5%).
 
@@ -112,8 +108,7 @@ groups:
         annotations:
           summary: "🚨 Eureka Server DOWN"
           description: |
-            Eureka is DOWN.
-            Service discovery will fail.
+            Eureka is unreachable.
 
       - alert: EurekaNoInstancesRegistered
         expr: eureka_instances_up == 0
@@ -124,7 +119,7 @@ groups:
         annotations:
           summary: "⚠️ No Services Registered in Eureka"
           description: |
-            Eureka is running, but 0 services are registered.
+            Eureka is running but shows 0 instances.
 
       - alert: EurekaInstanceCountLow
         expr: eureka_instances_up < 2
@@ -135,7 +130,7 @@ groups:
         annotations:
           summary: "⚠️ Some services not registered in Eureka"
           description: |
-            Registered instances: {{ $value | printf "%.0f" }} (Expected ≥ 2).
+            Registered: {{ $value | printf "%.0f" }} (Expected ≥2).
 
 
 
@@ -152,10 +147,7 @@ groups:
         annotations:
           summary: "🚨 Scheduler Service DOWN"
           description: |
-            Env: {{ $labels.env }}
             Instance: {{ $labels.instance }}
-            Status: ❌ DOWN
-            Action: Check container logs or restart service.
 
       - alert: SchedulerHighJVMHeapUsage
         expr: job:jvm_heap_used_percent{application="ROOMBILLZ-SCHEDULER-SERVICE"} > 85
@@ -166,8 +158,7 @@ groups:
         annotations:
           summary: "⚠️ Scheduler JVM Memory High"
           description: |
-            Heap usage is {{ $value | printf "%.1f" }}%.
-            Investigate memory leaks or increase heap size.
+            Heap: {{ $value | printf "%.1f" }}%
 
       - alert: SchedulerJobExecutionError
         expr: increase(roomBillz_scheduler_job_failed_total[5m]) > 3
@@ -178,9 +169,7 @@ groups:
         annotations:
           summary: "⚠️ Scheduler Job Failures Detected"
           description: |
-            Job failure count increased in the last 5 minutes.
-            Failures: {{ $value | printf "%.0f" }}
-            Check scheduler job logic or downstream services.
+            Failures (last 5m): {{ $value | printf "%.0f" }}
 
       - alert: SchedulerJobExecutionDurationHigh
         expr: histogram_quantile(0.95, sum(rate(roomBillz_scheduler_job_execution_seconds_bucket[5m])) by (le, application)) > 5
@@ -191,5 +180,56 @@ groups:
         annotations:
           summary: "⚠️ Scheduler Job Execution Time High"
           description: |
-            p95 job duration: {{ $value | printf "%.1f" }} seconds
-            Jobs taking too long, investigate dependencies.
+            p95 duration: {{ $value | printf "%.1f" }}s
+
+
+
+      # ======================================================
+      # ROOMBILLZ-DOCUMENT-SERVICE Alerts (New)
+      # ======================================================
+
+      - alert: DocumentServiceDown
+        expr: up{application="ROOMBILLZ-DOCUMENT-SERVICE"} == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: document
+        annotations:
+          summary: "🚨 Document Service DOWN"
+          description: |
+            Env: {{ $labels.env }}
+            Instance: {{ $labels.instance }}
+            Status: ❌ DOWN
+
+      - alert: DocumentServiceHighLatencyP95
+        expr: job:http_request_duration_seconds:p95{application="ROOMBILLZ-DOCUMENT-SERVICE"} > 0.6
+        for: 5m
+        labels:
+          severity: warning
+          service: document
+        annotations:
+          summary: "⚠️ Document Service High Latency"
+          description: |
+            p95 latency: {{ $value | printf "%.3f" }}s (limit: 0.6s)
+
+      - alert: DocumentServiceHighErrorRate
+        expr: job:http_error_ratio:percent5m{application="ROOMBILLZ-DOCUMENT-SERVICE"} > 4
+        for: 5m
+        labels:
+          severity: warning
+          service: document
+        annotations:
+          summary: "⚠️ Document Service Error Rate High"
+          description: |
+            Error rate: {{ $value | printf "%.2f" }}% (>4%)
+
+      - alert: DocumentServiceJVMHeapUsageHigh
+        expr: job:jvm_heap_used_percent{application="ROOMBILLZ-DOCUMENT-SERVICE"} > 85
+        for: 10m
+        labels:
+          severity: warning
+          service: document
+        annotations:
+          summary: "⚠️ Document Service JVM Memory High"
+          description: |
+            Heap used: {{ $value | printf "%.1f" }}%

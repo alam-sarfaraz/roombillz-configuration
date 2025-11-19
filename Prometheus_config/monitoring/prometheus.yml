@@ -5,7 +5,7 @@ global:
 alerting:
   alertmanagers:
     - static_configs:
-        - targets: 
+        - targets:
             - 'host.docker.internal:9093'
 
 rule_files:
@@ -35,6 +35,15 @@ scrape_configs:
       - targets: ['host.docker.internal:8083']
         labels:
           application: 'ROOMBILLZ-SCHEDULER-SERVICE'
+          env: 'dev'
+
+  # ✅ NEW: RoomBillz Document Service
+  - job_name: 'roombillz-document-service'
+    metrics_path: '/api/v1/document/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8084']
+        labels:
+          application: 'ROOMBILLZ-DOCUMENT-SERVICE'
           env: 'dev'
 
   - job_name: 'eureka-server'
