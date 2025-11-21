@@ -1,0 +1,188 @@
+version: '3.8'
+
+services:
+
+  # --------------------
+  # MySQL (single instance, multiple DBs created at startup)
+  # --------------------
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # Put init SQL file in ./mysql-init/init.sql on host
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - roombillz-net
+
+  # --------------------
+  # Zookeeper
+  # --------------------
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    container_name: zookeeper
+    restart: always
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+    ports:
+      - "2181:2181"
+    networks:
+      - roombillz-net
+
+  # --------------------
+  # Kafka
+  # --------------------
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    restart: always
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    ports:
+      - "9092:9092"
+    networks:
+      - roombillz-net
+
+  # --------------------
+  # Eureka
+  # --------------------
+  eureka-server:
+    image: roombillz-eureka:latest
+    container_name: eureka-server
+    restart: always
+    environment:
+      EUREKA_HOST: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - roombillz-net
+
+  # --------------------
+  # RoomBillz Main
+  # --------------------
+  roombillz-service:
+    image: roombillz-service:latest
+    container_name: roombillz-service
+    restart: always
+    depends_on:
+      - mysql
+      - kafka
+      - eureka-server
+    environment:
+      # DB (URL in your app YAML already uses database name "roombillz")
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+
+      # Infra
+      KAFKA_HOST: kafka
+      EUREKA_HOST: eureka-server
+
+      # Services it calls
+      NOTIFICATION_HOST: notification-service
+      DOCUMENT_HOST: document-service
+    ports:
+      - "8081:8081"
+    networks:
+      - roombillz-net
+
+  # --------------------
+  # Notification
+  # --------------------
+  notification-service:
+    image: roombillz-notification:latest
+    container_name: notification-service
+    restart: always
+    depends_on:
+      - mysql
+      - kafka
+      - eureka-server
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+
+      KAFKA_HOST: kafka
+      EUREKA_HOST: eureka-server
+
+      # Service it calls
+      ROOMBILLZ_HOST: roombillz-service
+      DOCUMENT_HOST: document-service
+    ports:
+      - "8082:8082"
+    networks:
+      - roombillz-net
+
+  # --------------------
+  # Schedule
+  # --------------------
+  schedule-service:
+    image: roombillz-schedule:latest
+    container_name: schedule-service
+    restart: always
+    depends_on:
+      - mysql
+      - kafka
+      - eureka-server
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+
+      KAFKA_HOST: kafka
+      EUREKA_HOST: eureka-server
+
+      ROOMBILLZ_HOST: roombillz-service
+      NOTIFICATION_HOST: notification-service
+      DOCUMENT_HOST: document-service
+    ports:
+      - "8083:8083"
+    networks:
+      - roombillz-net
+
+  # --------------------
+  # Document
+  # --------------------
+  document-service:
+    image: roombillz-document:latest
+    container_name: document-service
+    restart: always
+    depends_on:
+      - mysql
+      - kafka
+      - eureka-server
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+
+      KAFKA_HOST: kafka
+      EUREKA_HOST: eureka-server
+
+      ROOMBILLZ_HOST: roombillz-service
+      NOTIFICATION_HOST: notification-service
+    ports:
+      - "8084:8084"
+    networks:
+      - roombillz-net
+
+networks:
+  roombillz-net:
+
+volumes:
+  mysql_data:

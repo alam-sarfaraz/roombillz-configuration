@@ -1,0 +1,61 @@
+1️⃣ RoomBillz Main Service (8081)
+docker build -t roombillz-service .
+
+Tag
+docker tag roombillz-service sarfarazalam2702/roombillz-service:latest
+
+Push
+docker push sarfarazalam2702/roombillz-service:latest
+
+▶ Run
+docker run -p 8081:8081 sarfarazalam2702/roombillz-service:latest
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+2️⃣ RoomBillz Notification Service (8082)
+docker build -t roombillz-notification-service .
+
+Tag
+docker tag roombillz-notification-service sarfarazalam2702/roombillz-notification-service:latest
+
+Push
+docker push sarfarazalam2702/roombillz-notification-service:latest
+
+▶ Run
+docker run -p 8082:8082 sarfarazalam2702/roombillz-notification-service:latest
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+3️⃣ RoomBillz Schedule Service (8083)
+docker build -t roombillz-schedule-service .
+
+Tag
+docker tag roombillz-schedule-service sarfarazalam2702/roombillz-schedule-service:latest
+
+Push
+docker push sarfarazalam2702/roombillz-schedule-service:latest
+
+▶ Run
+docker run -p 8083:8083 sarfarazalam2702/roombillz-schedule-service:latest
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+4️⃣ RoomBillz Document Service (8084)
+🔨 Build
+docker build -t roombillz-document-service .
+
+🏷 Tag
+docker tag roombillz-document-service sarfarazalam2702/roombillz-document-service:latest
+
+📤 Push
+docker push sarfarazalam2702/roombillz-document-service:latest
+
+▶ Run
+docker run -p 8084:8084 sarfarazalam2702/roombillz-document-service:latest
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+5️⃣ RoomBillz Eureka Server (8761)
+
+docker build -t roombillz-eureka-server .
+
+Tag
+docker tag roombillz-eureka-server sarfarazalam2702/roombillz-eureka-server:latest
+
+Push
+docker push sarfarazalam2702/roombillz-eureka-server:latest
+
+▶ Run
+docker run -p 8761:8761 sarfarazalam2702/roombillz-eureka-server:latest
