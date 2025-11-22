@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   # --------------------
-  # MySQL (single instance, multiple DBs created at startup)
+  # MySQL
   # --------------------
   mysql:
     image: mysql:8
@@ -13,10 +13,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - mysql_data:/var/lib/mysql
-      # Put init SQL file in ./mysql-init/init.sql on host
       - ./mysql-init:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - roombillz-net
 
@@ -24,11 +23,12 @@ services:
   # Zookeeper
   # --------------------
   zookeeper:
-    image: bitnami/zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
     restart: always
     environment:
-      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
     networks:
@@ -38,7 +38,7 @@ services:
   # Kafka
   # --------------------
   kafka:
-    image: bitnami/kafka:latest
+    image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
     restart: always
     depends_on:
@@ -46,9 +46,9 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      ALLOW_PLAINTEXT_LISTENER: "yes"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     ports:
       - "9092:9092"
     networks:
@@ -69,7 +69,7 @@ services:
       - roombillz-net
 
   # --------------------
-  # RoomBillz Main
+  # RoomBillz Service
   # --------------------
   roombillz-service:
     image: roombillz-service:latest
@@ -80,17 +80,12 @@ services:
       - kafka
       - eureka-server
     environment:
-      # DB (URL in your app YAML already uses database name "roombillz")
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: root
-
-      # Infra
       KAFKA_HOST: kafka
       EUREKA_HOST: eureka-server
-
-      # Services it calls
       NOTIFICATION_HOST: notification-service
       DOCUMENT_HOST: document-service
     ports:
@@ -114,11 +109,8 @@ services:
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: root
-
       KAFKA_HOST: kafka
       EUREKA_HOST: eureka-server
-
-      # Service it calls
       ROOMBILLZ_HOST: roombillz-service
       DOCUMENT_HOST: document-service
     ports:
@@ -142,10 +134,8 @@ services:
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: root
-
       KAFKA_HOST: kafka
       EUREKA_HOST: eureka-server
-
       ROOMBILLZ_HOST: roombillz-service
       NOTIFICATION_HOST: notification-service
       DOCUMENT_HOST: document-service
@@ -170,14 +160,50 @@ services:
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: root
-
       KAFKA_HOST: kafka
       EUREKA_HOST: eureka-server
-
       ROOMBILLZ_HOST: roombillz-service
       NOTIFICATION_HOST: notification-service
     ports:
       - "8084:8084"
+    networks:
+      - roombillz-net
+
+  # =====================================
+  # PROMETHEUS + ALERTMANAGER + GRAFANA
+  # =====================================
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert-rules.yml:/etc/prometheus/alert-rules.yml
+    depends_on:
+      - alertmanager
+    networks:
+      - roombillz-net
+
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - ./email-template.tmpl:/etc/alertmanager/email-template.tmpl
+    networks:
+      - roombillz-net
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
     networks:
       - roombillz-net
 

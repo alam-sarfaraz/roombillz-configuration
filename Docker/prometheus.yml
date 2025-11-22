@@ -1,0 +1,62 @@
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - 'host.docker.internal:9093'
+
+rule_files:
+  - "/etc/prometheus/alert-rules.yml"
+  - "/etc/prometheus/recording-rules.yml"
+
+scrape_configs:
+  - job_name: 'roomBillz-service'
+    metrics_path: '/api/v1/roomBillz/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+        labels:
+          application: 'ROOMBILLZ-SERVICE'
+          env: 'dev'
+
+  - job_name: 'roombillz-notification-service'
+    metrics_path: '/api/v1/notification/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8082']
+        labels:
+          application: 'ROOMBILLZ-NOTIFICATION-SERVICE'
+          env: 'dev'
+
+  - job_name: 'roombillz-scheduler-service'
+    metrics_path: '/api/v1/scheduler/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8083']
+        labels:
+          application: 'ROOMBILLZ-SCHEDULER-SERVICE'
+          env: 'dev'
+
+  # ✅ NEW: RoomBillz Document Service
+  - job_name: 'roombillz-document-service'
+    metrics_path: '/api/v1/document/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8084']
+        labels:
+          application: 'ROOMBILLZ-DOCUMENT-SERVICE'
+          env: 'dev'
+
+  - job_name: 'eureka-server'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:8761']
+        labels:
+          application: 'ROOMBILLZ-EUREKA-SERVER'
+          env: 'dev'
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          application: 'PROMETHEUS'
+          env: 'dev'
