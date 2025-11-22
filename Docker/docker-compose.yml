@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
 
-  # --------------------
+  # ======================================================
   # MySQL
-  # --------------------
+  # ======================================================
   mysql:
     image: mysql:8
     container_name: mysql
@@ -19,9 +19,9 @@ services:
     networks:
       - roombillz-net
 
-  # --------------------
+  # ======================================================
   # Zookeeper
-  # --------------------
+  # ======================================================
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
@@ -34,9 +34,9 @@ services:
     networks:
       - roombillz-net
 
-  # --------------------
+  # ======================================================
   # Kafka
-  # --------------------
+  # ======================================================
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     container_name: kafka
@@ -54,32 +54,38 @@ services:
     networks:
       - roombillz-net
 
-  # --------------------
-  # Eureka
-  # --------------------
+  # ======================================================
+  # Eureka Server
+  # ======================================================
   eureka-server:
     image: roombillz-eureka:latest
     container_name: eureka-server
     restart: always
+    labels:
+      - "service.name=eureka-server"
     environment:
+      SPRING_PROFILES_ACTIVE: docker
       EUREKA_HOST: eureka-server
     ports:
       - "8761:8761"
     networks:
       - roombillz-net
 
-  # --------------------
+  # ======================================================
   # RoomBillz Service
-  # --------------------
+  # ======================================================
   roombillz-service:
     image: roombillz-service:latest
     container_name: roombillz-service
     restart: always
+    labels:
+      - "service.name=roombillz-service"
     depends_on:
       - mysql
       - kafka
       - eureka-server
     environment:
+      SPRING_PROFILES_ACTIVE: docker
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: root
@@ -93,18 +99,21 @@ services:
     networks:
       - roombillz-net
 
-  # --------------------
-  # Notification
-  # --------------------
+  # ======================================================
+  # Notification Service
+  # ======================================================
   notification-service:
     image: roombillz-notification:latest
     container_name: notification-service
     restart: always
+    labels:
+      - "service.name=notification-service"
     depends_on:
       - mysql
       - kafka
       - eureka-server
     environment:
+      SPRING_PROFILES_ACTIVE: docker
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: root
@@ -118,18 +127,21 @@ services:
     networks:
       - roombillz-net
 
-  # --------------------
-  # Schedule
-  # --------------------
+  # ======================================================
+  # Schedule Service
+  # ======================================================
   schedule-service:
     image: roombillz-schedule:latest
     container_name: schedule-service
     restart: always
+    labels:
+      - "service.name=schedule-service"
     depends_on:
       - mysql
       - kafka
       - eureka-server
     environment:
+      SPRING_PROFILES_ACTIVE: docker
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: root
@@ -144,18 +156,21 @@ services:
     networks:
       - roombillz-net
 
-  # --------------------
-  # Document
-  # --------------------
+  # ======================================================
+  # Document Service
+  # ======================================================
   document-service:
     image: roombillz-document:latest
     container_name: document-service
     restart: always
+    labels:
+      - "service.name=document-service"
     depends_on:
       - mysql
       - kafka
       - eureka-server
     environment:
+      SPRING_PROFILES_ACTIVE: docker
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: root
@@ -169,10 +184,9 @@ services:
     networks:
       - roombillz-net
 
-  # =====================================
-  # PROMETHEUS + ALERTMANAGER + GRAFANA
-  # =====================================
-
+  # ======================================================
+  # Prometheus
+  # ======================================================
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -186,6 +200,9 @@ services:
     networks:
       - roombillz-net
 
+  # ======================================================
+  # Alertmanager
+  # ======================================================
   alertmanager:
     image: prom/alertmanager
     container_name: alertmanager
@@ -197,6 +214,9 @@ services:
     networks:
       - roombillz-net
 
+  # ======================================================
+  # Grafana
+  # ======================================================
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -207,8 +227,67 @@ services:
     networks:
       - roombillz-net
 
+  # ======================================================
+  # Elasticsearch
+  # ======================================================
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.13
+    container_name: elasticsearch
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - roombillz-net
+
+  # ======================================================
+  # Kibana
+  # ======================================================
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.13
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - roombillz-net
+
+  # ======================================================
+  # Filebeat
+  # ======================================================
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.17.13
+    container_name: filebeat
+    user: root
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - elasticsearch
+    networks:
+      - roombillz-net
+
+# ======================================================
+# NETWORKS + VOLUMES
+# ======================================================
 networks:
   roombillz-net:
 
 volumes:
   mysql_data:
+  esdata:
